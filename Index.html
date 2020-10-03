@@ -20,6 +20,9 @@
             width: 100% !important;
             height: 100% !important;
         }
+        table :data-select-importance{
+            border: solid 1px;
+        }
         table th {
             border-top: 0px !important;
             border-bottom: 0px !important;
@@ -73,15 +76,9 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr data-addRow="true">
-                            <td>
-                                    <label for="timelinePriority" style="display: none;"></label>
+                        <tr>
+                            <td class="select-importance">
                                     <span class="badge badge-primary">普通</span>
-                                    <select class="form-control" id="timelinePriority">
-                                        <option selected><span class="badge badge-primary">普通</span></option>
-                                        <option><span class="badge badge-danger">重要</span></option>
-                                    </select>
-                                
                             </td>
                             <td>none</td>
                             <td>none</td>
@@ -93,7 +90,30 @@
                             </td>
                         </tr>
                     </tbody>
+                </table >
+                <form>
+
+                <table class="table">
+                    <tbody>
+                        <tr data-addRow="true">
+                            <td class="select-importance">
+                                    <span class="badge badge-primary">普通</span>
+                            </td>
+                            <td>none</td>
+                            <td>none</td>
+                            <td>
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="customCheckB2" checked>
+                                    <label class="custom-control-label" for="customCheckB2"></label>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
                 </table>
+                <div class="container" style="text-align: right;">
+                    <button type="reset" class="btn btn-primary">送出</button>
+                </div>
+            </form>
             </div>
             <div class="col-sm-6">
                 <h4 class="text-center">代辦事項</h4>
@@ -120,7 +140,9 @@
                             </td>
                         </tr>
                     </tbody>
+                    
                 </table>
+                
             </div>
         </div>
     </div>
@@ -182,6 +204,15 @@
         clean.addEventListener("click", function () {
             let comment = document.querySelector("#comment");
             comment.focus();
+        })
+        //普通重要切換
+        document.addEventListener('click', function(event){
+            let target=event.target;
+            if (!target.parentElement.classList.contains('select-importance')) return;
+            target.classList.toggle('badge-primary');
+            target.classList.toggle('badge-danger');
+            target.innerHTML=target.innerHTML=="重要"?"普通":"重要";
+
         })
     </script>
 </body>
