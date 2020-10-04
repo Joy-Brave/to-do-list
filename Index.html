@@ -26,10 +26,12 @@
         table th {
             border-top: 0px !important;
             border-bottom: 0px !important;
+            position: relative;
         }
 
         table td {
             border-top: 0px !important;
+            position: relative;
         }
 
         table th:first-child {
@@ -38,6 +40,30 @@
 
         table th:last-child {
             border-radius: 0 5px 5px 0;
+        }
+        .mycol1 {
+            width:10%;
+  
+        }
+
+        .mycol2 {
+            width:35%;
+    
+        }
+
+        .mycol3 {
+            width:25%;
+        }
+
+        .mycol4 {
+            width:25%;
+        }
+        table input{
+            position: absolute;
+            transform:scale(0.7) translate(-40%, -40%);
+            font-size: 50%;
+            padding:2% !important;
+            
         }
 
         @font-face {
@@ -69,39 +95,30 @@
                 <table class="table">
                     <thead class="thead-dark">
                         <tr>
-                            <th>重要性</th>
-                            <th>時間</th>
-                            <th>項目</th>
-                            <th>是否完成</th>
+                            <th class="mycol1">重要性</th>
+                            <th class="mycol2">時間</th>
+                            <th class="mycol3">項目</th>
+                            <th class="mycol4">是否完成</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td class="select-importance">
-                                    <span class="badge badge-primary">普通</span>
-                            </td>
-                            <td>none</td>
-                            <td>none</td>
-                            <td>
-                                <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="customCheckB1" checked>
-                                    <label class="custom-control-label" for="customCheckB1"></label>
-                                </div>
-                            </td>
-                        </tr>
+                       
                     </tbody>
                 </table >
-                <form>
-
+                <form style="background-color: bisque; padding: 1rem;padding: 0;" >
+                <h6  class="text-center">新增：</h6>
                 <table class="table">
                     <tbody>
-                        <tr data-addRow="true">
-                            <td class="select-importance">
+                        <tr data-addRow="true" style="background-color: cadetblue;">
+                            <td class="select-importance mycol1" data-importance="0">
                                     <span class="badge badge-primary">普通</span>
                             </td>
-                            <td>none</td>
-                            <td>none</td>
-                            <td>
+                            <td class="mycol2">
+                                <input class="form-control input-sm"  type="time" 
+                                 required>
+                            </td>
+                            <td class="mycol3">none</td>
+                            <td class="mycol4">
                                 <div class="custom-control custom-checkbox">
                                     <input type="checkbox" class="custom-control-input" id="customCheckB2" checked>
                                     <label class="custom-control-label" for="customCheckB2"></label>
@@ -175,8 +192,15 @@
     </div>
 
     <script>
-        //日期
+        //基本屬性
+        let importanceMap=new Map();
+        importanceMap.set('0',{value:"普通",class:"badge-primary"})
+        importanceMap.set('1',{value:"重要",class:"badge-danger"})
 
+        //測是預設值
+
+
+        //今日日期
         let currentDate = new Date();
         function getDateFormat(date) {
             let year = date.getFullYear()
@@ -209,11 +233,14 @@
         document.addEventListener('click', function(event){
             let target=event.target;
             if (!target.parentElement.classList.contains('select-importance')) return;
-            target.classList.toggle('badge-primary');
-            target.classList.toggle('badge-danger');
-            target.innerHTML=target.innerHTML=="重要"?"普通":"重要";
-
+            let number= target.parentElement.dataset.importance;
+            target.classList.toggle(importanceMap.get(number).class);
+            target.parentElement.dataset.importance=number=String(importanceMap.size<= +number+1? 0: +number+1);
+            target.classList.toggle(importanceMap.get(number).class);
+            target.innerHTML=importanceMap.get(number).value;
         })
+        //
+
     </script>
 </body>
 
