@@ -115,8 +115,6 @@ app.controller("toDoListCtrl", ['$scope', '$window', function ($scope, $window) 
     $scope.sendMyData = function () {
         if (!confirm('是否送出?')) return;
         $scope.sending = true;
-        console.log($scope.dataTimeline)
-        console.log($scope.myDate)
         const data = {
             condition: 'receive',
             myDate: $scope.myDate,
@@ -154,7 +152,6 @@ app.controller("toDoListCtrl", ['$scope', '$window', function ($scope, $window) 
                     $scope.dataTimeline = $scope.dataTimeline.filter(element => {
                         return !(('delete' in element) && element.delete == 'Y')
                     })
-                    console.log($scope.dataTimeline)
 
                     $scope.dataList = $scope.dataList.filter(element => {
                         return !(('delete' in element) && element.delete == 'Y')

@@ -57,18 +57,13 @@
             position: fixed;
             top: 50%;
             left: 50%;
-
-
             /*set to a negative number 1/2 of your width*/
             margin-left: -40%;
             /*set to a negative number 1/2 of your height*/
             margin-top: -25%;
-
             width: 80%;
             max-width: 30em;
             height: 17em;
-
-
             border-radius: 5px;
             border: 1px solid rgba(160, 160, 160, 0.295);
             background-color: rgba(226, 228, 225, 0.95);
@@ -212,7 +207,7 @@
 
             background-position: center;
             background-size: 50% 3px, 3px 50%;
-            /*thickness = 2px, length = 50% (25px)*/
+            /*thickness = 3px, length = 50% (25px)*/
             background-repeat: no-repeat;
             box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
             left: 50%;
@@ -277,6 +272,9 @@
             div.bottomBtn {
                 z-index: 1;
             }
+        }
+        .blankPart{
+            height:100px;
         }
     </style>
 </head>
@@ -367,7 +365,7 @@
                         <div class="spinner-border text-primary mySpinner"></div>
                     </div>
                     <ul id='dragMe' class="list-group">
-                        <li style="position:relative" ng-repeat="data in dataList |orderBy:'time' track by $index"
+                        <li style="position:relative " ng-repeat="data in dataList |orderBy:'time' track by $index"
                             ng-click="deleteMode=='N'?toggleDo('dataList',data.order,$event):toggleDelete('dataList',data.order)"
                             ng-class="{'checked' : data.check=='Y','shaking':(data.delete=='Y')}"
                             ng-mousedown="$event.preventDefault();$event.stopPropagation();deleteMode=='N'?dragHandler($event):{}"
@@ -427,6 +425,7 @@
                 <!--/list-->
 
             </div>
+            <div class='blankPart'></div>
         </div>
         <form id='outerForm' name="middleFloat" class="middleFloat" style="display: none;"
             ng-click="$event.stopPropagation()">

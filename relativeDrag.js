@@ -1,18 +1,17 @@
 function dragHandler(event) {
-    console.log(event);
     let dragElem, dragElemTop, dragElemLeft, dragElemWidth, dragElemHeight, originLeft, originTop;
     let placeholder;
     let isDragged = false;
     let isSwapped = false;
     dragElem = event.target.closest('.draggable');
+    document.querySelector('body').style.overflow = 'hidden';
 
     const mouseDownDrag = function (event) {
         //event.preventDefault();
 
+
         const rect = dragElem.getBoundingClientRect();
-        console.log(rect);
         [dragElemLeft, dragElemTop, dragElemWidth, dragElemHeight] = [rect.left, rect.top, rect.width, rect.height];
-        console.log(dragElemHeight);
         [originLeft, originTop] = [event.pageX, event.pageY];
         document.addEventListener('mousemove', mouseMoveDrag);
         document.addEventListener('mouseup', mouseUpDrag);
@@ -92,11 +91,13 @@ function dragHandler(event) {
 
         dragElem = dragElemTop = dragElemLeft = dragElemWidth = dragElemHeight = originLeft = originTop = null;
 
+        document.querySelector('body').style.overflow ='auto';
     }
     /*
     parentElem = document.getElementById(parentId);
     [].slice.call(parentElem.querySelectorAll('.draggable')).forEach(
         (item) => item.addEventListener('mousedown', mouseDownDrag));
     */
+
     return mouseDownDrag(event)
 }
